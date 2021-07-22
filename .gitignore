@@ -1,0 +1,14 @@
+text.txt
+comp.txt
+.vscode
+*.exe
+main
+objectsrc/*.o
+libsrc/libs/*.a
+lab2
+lab3
+lab4
+lab5
+lab2
+myterm.bin
+memory.bin
