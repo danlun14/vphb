@@ -4,8 +4,9 @@
 #include "libsrc/libs/other.h"
 
 #define PASSWORD_LAB "chunga-changa"
-
-int days_in_month[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+#define day 8
+#define month 8
+#define year 2001
 
 void signalhandler()
 {
@@ -13,7 +14,10 @@ void signalhandler()
 
 int main()
 {
-
+    //pretty_print("helloasdasdsadasdas");
+    //wait(3);
+    int date[3] = {30, 5, 1976};
+    int index = 2;
     struct termios default_options;
     if (tcgetattr(STDIN_FILENO, &default_options) != 0)
     {
@@ -48,6 +52,9 @@ int main()
     enum colors currient_color = blue;
 
     printBox();
+    print_date(date);
+    print_select(index);
+
     fflush(stdout);
     while (1)
     {
@@ -66,25 +73,35 @@ int main()
         }
         else if (key == RIGHT)
         {
+            if (index < 2)
+            {
+                index++;
+            }
         }
         else if (key == LEFT)
         {
+            if (index > 0)
+            {
+                index--;
+            }
         }
         else if (key == UP)
         {
+            date[index]++;
         }
         else if (key == DOWN)
         {
+            date[index]--;
         }
 
         else if (key == ENTER)
         {
-            mt_clrscr();
-            fflush(stdout);
+            if ((day == date[0]) && (month == date[1]) && (year == date[2]))
+            {
+                break;
+            }
         }
-        else if (key == 'l')
-        {
-        }
+
         else if (key == LEFT)
         {
             nval.it_interval.tv_sec = 1;
@@ -93,18 +110,16 @@ int main()
             setitimer(ITIMER_REAL, &nval, &oval);
             //rk_readKey(&key);
         }
-        else if (key == 's')
-        {
-        }
-        else if (key == 't')
-        {
-        }
-        else if (key == 'i')
-        {
-        }
+        fix_date(date);
+        print_date(date);
+        printBox();
+
+        print_select(index);
+        mt_gotoXY(10, 2);
         //mt_clearcolor();
+        fflush(stdout);
     }
-    mt_gotoXY(23, 0);
+
     mt_clearcolor();
     return 0;
 }

@@ -8,8 +8,7 @@ int rk_readKey(enum keys *key)
     rk_mytermsave();
 
     char buf[6] = {0};
-    mt_gotoXY(23, 0);
-    rk_mytermregime(1, 0, 1, 0, 1);
+    rk_mytermregime(1, 0, 1, 1, 1);
 
     read(STDIN_FILENO, buf, 6);
 
