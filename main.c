@@ -3,7 +3,9 @@
 #include "libsrc/libs/myReadKey.h"
 #include "libsrc/libs/other.h"
 
-#define LAB_TIP ""
+#define DATE_TIP "TIP - https://drive.google.com/drive/folders/1jnhvTJKHlMemGoyjkdQX0OBvAsiFWqKl?usp=sharing"
+#define LAB_TIP "https://drive.google.com/drive/folders/15ahLndvo6M_MYMMGAU-UkFHYC-jfJK6_?usp=sharing"
+#define PRESENT_TIP "CONGRATULATIONS!!                            \nYou do IT - vzlomal pentagon.                    \nNow nyzhno broke way - there uliki prestupleniya:                                       \nhttps://drive.google.com/drive/folders/1P6ST0Xp9-IGjWsGk3ra1gJ_84v3DOpvp?usp=sharing"
 #define BUF_SIZE 24
 #define PASSWORD_LAB "chyort"
 #define day 8
@@ -104,6 +106,7 @@ int date_selector(int ans_d, int ans_m, int ans_y)
 
         print_select(index);
         mt_gotoXY(10, 2);
+        printf("%s", DATE_TIP);
         fflush(stdout);
     }
     return 0;
@@ -347,14 +350,24 @@ int main()
     int status = date_selector(day, month, year);
     if (status == 1)
     {
-        //return 0;
+        mt_clrscr();
+        printf("failed(");
+        return 0;
     }
     enum keys key;
-    labirint();
-    //mt_clrscr();
+    status = labirint();
+    if (status == 1)
+    {
+        mt_clrscr();
+        printf("failed((");
+        return 0;
+    }
+    mt_clrscr();
     enum colors setup_color = blue;
     enum colors currient_color = blue;
 
     mt_clearcolor();
+    pretty_print(PRESENT_TIP);
+    rk_readKey(key);
     return 0;
 }
