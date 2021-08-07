@@ -4,7 +4,7 @@
 int mt_clrscr(void)
 {
     printf("\E[H\E[J");
-
+    fflush(stdout);
     return 0;
 }
 //производит очистку и перемещение курсора в левый верхний угол экрана

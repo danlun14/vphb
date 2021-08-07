@@ -81,21 +81,12 @@ void pretty_print(char *str)
 
 int m_strcmp(char *s1, char *s2)
 {
-    int check = 0;
-    for (int i = 0; isalpha(s1[i]) && isalpha(s2[i]); i++)
+    for (int i = 0; isalpha(s1[i]) != 0 || i != 4; i++)
     {
-        if (s1[i] == s2[i])
-        {
-            check++;
-        }
-        else
-        {
-            check = 0;
-            break;
-        }
+        if (s1[i] != s2[i])
+            return 1;
     }
-
-    return check;
+    return 0;
 }
 
 void print_date(int *date)
@@ -110,16 +101,6 @@ void print_date(int *date)
     mt_gotoXY(5, 4);
     printf("%2d", date[0]);
     mt_gotoXY(4, 4);
-    if (date[0] > 1)
-    {
-
-        printf("%2d", date[0] - 1);
-    }
-    else
-    {
-        printf("  ");
-    }
-    mt_gotoXY(6, 4);
     if (date[0] < days_in_month[date[1] - 1])
     {
 
@@ -129,22 +110,32 @@ void print_date(int *date)
     {
         printf("  ");
     }
+    mt_gotoXY(6, 4);
+    if (date[0] > 1)
+    {
+
+        printf("%2d", date[0] - 1);
+    }
+    else
+    {
+        printf("  ");
+    }
     //month
     mt_gotoXY(5, 9);
     printf("%2d", date[1]);
     mt_gotoXY(4, 9);
-    if (date[1] > 1)
+    if (date[1] < 12)
     {
-        printf("%2d", date[1] - 1);
+        printf("%2d", date[1] + 1);
     }
     else
     {
         printf("  ");
     }
     mt_gotoXY(6, 9);
-    if (date[1] < 12)
+    if (date[1] > 1)
     {
-        printf("%2d", date[1] + 1);
+        printf("%2d", date[1] - 1);
     }
     else
     {
@@ -154,18 +145,18 @@ void print_date(int *date)
     mt_gotoXY(5, 14);
     printf("%4d", date[2]);
     mt_gotoXY(4, 14);
-    if (date[1] > -999)
+    if (date[1] < 9999)
     {
-        printf("%4d", date[2] - 1);
+        printf("%4d", date[2] + 1);
     }
     else
     {
         printf("  ");
     }
     mt_gotoXY(6, 14);
-    if (date[1] < 9999)
+    if (date[1] > -999)
     {
-        printf("%4d", date[2] + 1);
+        printf("%4d", date[2] - 1);
     }
     else
     {
